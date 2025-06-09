@@ -1,0 +1,72 @@
+/* Import Roboto Font */
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap");
+
+
+/* CSS Variables for Dark Mode */
+:root {
+  --primary-green: #a9b650;
+  --primary-green-hover: #b2c530;
+  --primary-green-light: rgba(169, 182, 80, 0.1);
+  --background-dark: #0a0a0a;
+  --background-card: #1a1a1a;
+  --background-secondary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  --border-color: #3a3a3a;
+  --shadow-color: rgba(0, 0, 0, 0.3);
+  --gradient-primary: linear-gradient(135deg, var(--primary-green), #8fa83d);
+  --gradient-secondary: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+  --font-family: "Roboto", sans-serif;
+
+    /* Gradient Colors */
+  --color-light-green: #90f755;
+  --color-mid-green: #5dc915;
+  --color-green: #22c52a;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  font-size: 1.4rem;
+}
+
+.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--text-primary);
+}
+p {
+  color: var(--text-secondary);
+}
+/* Container */
+.container {
+  margin: 0 auto;
+  
+}
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
