@@ -27,16 +27,16 @@ const styles = /* css */ `
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 90%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 0.2rem;
     width: 100%;
   }
 
   .landing-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 4rem;
+    gap: 2em;
     align-items: center;
   }
 
@@ -128,40 +128,18 @@ const styles = /* css */ `
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 400px;
   }
 
   .landing-image-container {
-    width: 100%;
-    max-width: 800px;
+    max-width: 100%;
     height: auto;
-    position: relative;
   }
 
   .computer-svg {
     width: 100%;
+    max-width: 600px;
     height: auto;
-    max-width: 100%;
     filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.3));
-    transition: transform 0.3s ease;
-  }
-
-  @media (min-width: 1200px) {
-    .landing-image-container {
-      max-width: 900px;
-    }
-  }
-
-  @media (min-width: 1400px) {
-    .landing-image-container {
-      max-width: 1000px;
-    }
-  }
-
-  @media (min-width: 1600px) {
-    .landing-image-container {
-      max-width: 1100px;
-    }
   }
 
   @media (max-width: 768px) {
@@ -223,27 +201,14 @@ const template = /* html */ `
         <div class="landing-image">
           <div class="landing-image-container">
             <svg id="scalable-svg" viewBox="0 0 800 600" class="computer-svg" style="width: 100%; height: auto;">
-              <!-- Computer Base -->
               <rect x="50" y="400" width="700" height="150" rx="20" fill="#2a2a2a" stroke="#444" stroke-width="2"/>
-              
-              <!-- Computer Screen Frame -->
               <rect x="100" y="80" width="600" height="380" rx="15" fill="#1a1a1a" stroke="#444" stroke-width="3"/>
-              
-              <!-- Screen Bezel -->
               <rect x="120" y="100" width="560" height="340" rx="10" fill="#000"/>
-              
-              <!-- Screen Content -->
               <foreignObject x="125" y="105" width="550" height="330">
                 <img src="Frontend/src/Images/cuerdos-standard.webp" alt="CuerdOS Desktop" style="width: 100%; height: 100%; object-fit: cover; border-radius: 8px;"/>
               </foreignObject>
-              
-              <!-- Screen Reflection -->
               <rect x="125" y="105" width="550" height="330" rx="8" fill="url(#screenGradient)" opacity="0.1"/>
-              
-              <!-- Keyboard -->
               <rect x="150" y="480" width="500" height="60" rx="8" fill="#333" stroke="#555" stroke-width="1"/>
-              
-              <!-- Keyboard Keys -->
               <g fill="#444" stroke="#666" stroke-width="0.5">
                 <rect x="160" y="490" width="30" height="8" rx="2"/>
                 <rect x="195" y="490" width="30" height="8" rx="2"/>
@@ -285,7 +250,7 @@ class LandingComponent extends HTMLElement {
   constructor() {
     super()
     this.shadow = this.attachShadow({ mode: "open" })
-    this.scaleSVG = this.scaleSVG.bind(this)
+    this.scaleSVG = this.scaleSVG.bind(this);
   }
 
   connectedCallback() {
@@ -337,58 +302,17 @@ class LandingComponent extends HTMLElement {
       }
     }
   }
+  scaleSVG() {
+  const svg = document.getElementById('scalable-svg')
+  const container = svg.parentElement
 
-  setupResponsiveSVG() {
-    const svg = this.shadow.getElementById("scalable-svg")
-    const container = this.shadow.querySelector(".landing-image-container")
 
-    if (!svg || !container) return
+  const containerWidth = container.clientWidth
 
-    const updateSVGSize = () => {
-      const containerWidth = container.clientWidth
-      const viewportWidth = window.innerWidth
-
-      // Base aspect ratio
-      const aspectRatio = 800 / 600
-
-      // Calculate responsive height
-      let newHeight = containerWidth / aspectRatio
-
-      // Scale factor based on viewport width
-      let scaleFactor = 1
-
-      if (viewportWidth >= 1600) {
-        scaleFactor = 1.3
-      } else if (viewportWidth >= 1400) {
-        scaleFactor = 1.2
-      } else if (viewportWidth >= 1200) {
-        scaleFactor = 1.1
-      } else if (viewportWidth <= 768) {
-        scaleFactor = 0.9
-      }
-
-      newHeight *= scaleFactor
-
-      // Set the new dimensions
-      svg.style.width = `${containerWidth}px`
-      svg.style.height = `${newHeight}px`
-      svg.style.maxWidth = "100%"
-
-      // Update container height to match
-      container.style.height = `${newHeight}px`
-    }
-
-    // Initial setup
-    updateSVGSize()
-
-    // Update on resize with debouncing
-    let resizeTimeout
-    const handleResize = () => {
-      clearTimeout(resizeTimeout)
-      resizeTimeout = setTimeout(updateSVGSize, 100)
-    }
-
-    window.addEventListener("resize", handleResize)
+ 
+  const aspectRatio = 800 / 600
+  const newHeight = containerWidth / aspectRatio
+  svg.style.height = `${newHeight}px`
   }
 }
 

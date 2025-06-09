@@ -11,7 +11,7 @@ const styles = /* css */ `
   }
 
   .container {
-    max-width: 1200px;
+    max-width: 95%;
     margin: 0 auto;
     padding: 0 20px;
   }
@@ -141,14 +141,15 @@ const template = /* html */ `
   <style>${styles}</style>
   <section class="technical-section" id="technical">
     <div class="container">
-      <div class="technical-grid">
-        <div class="technical-content">
+      <div class="technical-content">
+        <div class="technical-title">
           <h2 class="technical-title" id="str-title-otherfeatures">Technical Excellence</h2>
           <p class="technical-description" id="str-technical-desc">
             CuerdOS isn't just another Linux distribution. It's a carefully crafted system with performance
             optimizations and modern features.
           </p>
-
+        </div>
+        <div class="technical-grid">
           <div class="technical-features">
             <div class="technical-feature">
               <i data-lucide="check" class="check-icon"></i>
@@ -183,13 +184,14 @@ const template = /* html */ `
               <span id="str-content-otherfeatures-8">Optimized boot speed and system responsiveness</span>
             </div>
           </div>
-        </div>
-
-        <div class="technical-image">
-          <div class="technical-image-container">
-            <img src="Frontend/src/Images/cuerdos-standard.webp" alt="CuerdOS Standard" class="technical-img">
+          <div class="technical-image">
+            <div class="technical-image-container">
+              <img src="Frontend/src/Images/cuerdos-standard.webp" alt="CuerdOS Standard" class="technical-img">
+            </div>
           </div>
         </div>
+
+
       </div>
     </div>
   </section>

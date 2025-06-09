@@ -50,11 +50,6 @@ body {
 p {
   color: var(--text-secondary);
 }
-/* Container */
-.container {
-  margin: 0 auto;
-  
-}
 /* Animations */
 @keyframes fadeInUp {
   from {
