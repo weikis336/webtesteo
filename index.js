@@ -9,7 +9,7 @@ import "./Frontend/src/webComponents/sections/spins_Grid_Component.js"
 import "./Frontend/src/webComponents/sections/features_Component.js"
 import "./Frontend/src/webComponents/sections/landing_Component.js"
 import "./Frontend/src/webComponents/sections/technical_Component.js"
-import "./Frontend/src/webComponents/sections/spins_Grid_Component.js"
+// import "./Frontend/src/webComponents/sections/spins_Grid_Component.js"
 // Other Imports
 
 import "./Frontend/src/translations.js"
