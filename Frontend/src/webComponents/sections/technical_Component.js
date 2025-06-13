@@ -6,8 +6,8 @@ const styles = /* css */ `
   }
 
   .technical-section {
-    padding: 6rem 0;
-    background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+    padding: var(--section-padding);
+    background: var(--background-section);
   }
 
   .container {
@@ -15,33 +15,31 @@ const styles = /* css */ `
     margin: 0 auto;
     padding: 0 20px;
   }
-
+  .section-title {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  .section-title h1 {
+    font-size: var(--section-title-font);
+    margin-bottom: 0.7rem;
+  }
+  .section-title h1 span {
+    background: var(--gradient-title);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .section-description {
+    font-size: var(--section-description-font);
+    color: #cccccc;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+  }
   .technical-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
-  }
-
-  .technical-content {
-    z-index: 2;
-  }
-
-  .technical-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, #a9b650 0%, #ffffff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .technical-description {
-    font-size: 1.2rem;
-    color: #cccccc;
-    margin-bottom: 2.5rem;
-    line-height: 1.6;
   }
 
   .technical-features {
@@ -65,12 +63,6 @@ const styles = /* css */ `
     background: rgba(169, 182, 80, 0.1);
     border-color: rgba(169, 182, 80, 0.3);
     transform: translateX(8px);
-  }
-
-  .check-icon {
-    color: #a9b650;
-    font-size: 1.2rem;
-    flex-shrink: 0;
   }
 
   .technical-feature span {
@@ -119,11 +111,11 @@ const styles = /* css */ `
       gap: 2rem;
     }
 
-    .technical-title {
+    .section-title {
       font-size: 2rem;
     }
 
-    .technical-description {
+    .section-description {
       font-size: 1rem;
     }
 
@@ -142,9 +134,11 @@ const template = /* html */ `
   <section class="technical-section" id="technical">
     <div class="container">
       <div class="technical-content">
-        <div class="technical-title">
-          <h2 class="technical-title" id="str-title-otherfeatures">Technical Excellence</h2>
-          <p class="technical-description" id="str-technical-desc">
+        <div class="section-title">
+          <h1 id="str-title-otherfeatures">
+            <span>Technical Excellence</span>
+          </h1>
+          <p class="section-description" id="str-technical-desc">
             CuerdOS isn't just another Linux distribution. It's a carefully crafted system with performance
             optimizations and modern features.
           </p>
@@ -152,35 +146,27 @@ const template = /* html */ `
         <div class="technical-grid">
           <div class="technical-features">
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-1">Bauh Store preconfigured for easy software installation</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-2">ZRam optimization for better memory management</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-3">Nala and Apt-fast for faster package management</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-4">Custom kernel with BORE scheduler and Ananicy daemon</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-5">TLP power management for optimal battery life</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-6">Pipewire audio server with low latency</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-7">Waydroid support for Android apps</span>
             </div>
             <div class="technical-feature">
-              <i data-lucide="check" class="check-icon"></i>
               <span id="str-content-otherfeatures-8">Optimized boot speed and system responsiveness</span>
             </div>
           </div>
@@ -206,7 +192,6 @@ class TechnicalComponent extends HTMLElement {
   connectedCallback() {
     this.render()
   }
-
   render() {
     this.shadow.innerHTML = template
   }

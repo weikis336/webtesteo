@@ -295,7 +295,6 @@ const template = /* html */ `
             <div class="spin-downloads">
               <a href="https://sourceforge.net/projects/cuerdos/files/community_spins/cuerdos-budgie/CuerdOS-1.2.1-Budgie_RE_amd64.iso/download" 
                  class="btn btn-primary spin-primary budgie-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="spin-secondary">
@@ -305,7 +304,6 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/budgie-re-hash.txt" class="spin-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
@@ -332,7 +330,6 @@ const template = /* html */ `
             <div class="spin-downloads">
               <a href="https://sourceforge.net/projects/cuerdos/files/community_spins/cuerdos-cinnamix/CuerdOS-1.2.1-CinnamiX_amd64.iso/download" 
                  class="btn btn-primary spin-primary cinnamon-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="spin-secondary">
@@ -342,7 +339,6 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/cinnamix-hash.txt" class="spin-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
@@ -369,7 +365,6 @@ const template = /* html */ `
             <div class="spin-downloads">
               <a href="https://sourceforge.net/projects/cuerdos/files/community_spins/cuerdos-lxqt/CuerdOS-1.2.1-LXQt_amd64.iso/download" 
                  class="btn btn-primary spin-primary lxqt-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="spin-secondary">
@@ -379,7 +374,6 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/lxqt-hash.txt" class="spin-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
@@ -406,7 +400,6 @@ const template = /* html */ `
             <div class="spin-downloads">
               <a href="https://sourceforge.net/projects/cuerdos/files/community_spins/cuerdos-mate/CuerdOS-1.2.1-MATE_amd64.iso/download" 
                  class="btn btn-primary spin-primary mate-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="spin-secondary">
@@ -416,7 +409,6 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/mate-hash.txt" class="spin-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
@@ -443,7 +435,6 @@ const template = /* html */ `
             <div class="spin-downloads">
               <a href="https://sourceforge.net/projects/cuerdos/files/community_spins/cuerdos-shell/CuerdOS_1.2.1-Shell.iso/download" 
                  class="btn btn-primary spin-primary shell-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="spin-secondary">
@@ -453,7 +444,6 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/shell-hash.txt" class="spin-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
@@ -480,7 +470,6 @@ const template = /* html */ `
             <div class="spin-downloads">
               <a href="https://sourceforge.net/projects/cuerdos/files/community_spins/cuerdos-x3/CuerdOS-1.2-X3_amd64.iso/download" 
                  class="btn btn-primary spin-primary x3-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="spin-secondary">
@@ -490,7 +479,6 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/x3-hash.md5" class="spin-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
@@ -524,45 +512,10 @@ class SpinsGridComponent extends HTMLElement {
 
   connectedCallback() {
     this.render()
-    this.initializeDownloads()
   }
 
   render() {
     this.shadow.innerHTML = template
-  }
-
-  initializeDownloads() {
-    // Add loading states for download buttons
-    this.shadow.querySelectorAll(".spin-primary").forEach((button) => {
-      button.addEventListener("click", function (e) {
-        const originalText = this.innerHTML
-        const userLanguage = navigator.language || navigator.userLanguage
-        let loadingText = "Downloading..."
-
-        if (userLanguage.startsWith("es")) {
-          loadingText = "Descargando..."
-        } else if (userLanguage.startsWith("pt")) {
-          loadingText = "Baixando..."
-        }
-
-        this.innerHTML = `<i data-lucide="loader-2"></i> <span>${loadingText}</span>`
-        this.classList.add("loading")
-
-        // Check if lucide is defined before using it
-        if (window.lucide) {
-          window.lucide.createIcons()
-        }
-
-        setTimeout(() => {
-          this.innerHTML = originalText
-          this.classList.remove("loading")
-          // Check if lucide is defined before using it
-          if (window.lucide) {
-            window.lucide.createIcons()
-          }
-        }, 3000)
-      })
-    })
   }
 }
 

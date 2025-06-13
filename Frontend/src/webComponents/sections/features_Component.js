@@ -5,9 +5,9 @@ const styles = /* css */ `
     box-sizing: border-box;
   }
 
-  .features {
-    padding: 6rem 0;
-    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+  .features-section {
+    padding: var(--section-padding);
+    background: var(--background-section);
   }
 
   .container {
@@ -17,34 +17,39 @@ const styles = /* css */ `
   }
 
   .features-content {
+    display: flex;
+    align-items:center;
+    flex-direction:column;
     text-align: center;
     margin-bottom: 4rem;
   }
-
-  .features-description h1 {
-    font-size: 3rem;
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #ffffff;
+  .section-title {
+    max-width: 600px;
+  }
+  .section-title h1 {
+    font-size: var(--section-title-font);
+    margin-bottom: 0.7rem;
   }
 
-  .features-description h1 span {
-    background: linear-gradient(135deg, #a9b650 0%, #ffffff 100%);
+  .section-title h1 span {
+    background: var(--gradient-title);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .description {
-    font-size: 1.2rem;
-    color: #cccccc;
-    max-width: 600px;
+  .section-description {
+    font-size: var(--section-description-font);
+    color: var(--section-description-color);
     margin: 0 auto;
     line-height: 1.6;
   }
 
   .landing-features-container {
+    display:grid;
     margin-top: 4rem;
+    align-items:normal;
+    width:100%;
   }
 
   .card-box {
@@ -150,15 +155,15 @@ const styles = /* css */ `
   }
 
   @media (max-width: 768px) {
-    .features {
+    .features-section {
       padding: 4rem 0;
     }
 
-    .features-description h1 {
+    .section-title h1 {
       font-size: 2rem;
     }
 
-    .description {
+    .section-description {
       font-size: 1rem;
     }
 
@@ -178,14 +183,14 @@ const styles = /* css */ `
 
 const template = /* html */ `
   <style>${styles}</style>
-  <section class="features" id="about">
+  <section class="features-section" id="about">
     <div class="container">
       <div class="features-content">
-        <div class="features-description">
+        <div class="section-title">
           <h1>
             <span>Why Choose CuerdOS?</span>
           </h1>
-          <p class="description" id="str-content-about-2">
+          <p class="section-description" id="str-content-about-2">
             Built with performance and user experience in mind, 
             CuerdOS delivers a modern Linux experience.
           </p>
@@ -261,10 +266,63 @@ class FeaturesComponent extends HTMLElement {
 
   connectedCallback() {
     this.render()
+    this.scrollFinder()
   }
 
   render() {
     this.shadow.innerHTML = template
+  }
+  scrollFinder() {
+    // Tags the links inside the #href when <a> element is called 
+    this.shadow.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener("click", (e) => {
+        e.preventDefault()
+        const targetId = anchor.getAttribute("href").substring(1)
+        this.scrollToSection(targetId)
+      })
+    })
+  }
+    // This method finds a section and scrolls to it
+  scrollToSection(sectionId) {
+    let target = document.getElementById(sectionId)
+    if (!target) {
+      target = document.querySelector(`#${sectionId}`)
+    }
+    if (!target) {
+      const allComponents = document.querySelectorAll("*")
+      for (const component of allComponents) {
+        if (component.shadowRoot) {
+          const shadowTarget = component.shadowRoot.querySelector(`#${sectionId}`)
+          if (shadowTarget) {
+            target = shadowTarget
+            break
+          }
+        }
+      }
+    }
+
+    if (target) {
+      const offsetTop = target.offsetTop - 80
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth",
+      })
+    } else {
+      const sectionMap = {
+        about: 0.15,
+        technical: 0.4,
+        download: 0.6,
+        spins: 0.8,
+      }
+
+      if (sectionMap[sectionId]) {
+        const scrollPosition = document.documentElement.scrollHeight * sectionMap[sectionId]
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: "smooth",
+        })
+      }
+    }
   }
 }
 

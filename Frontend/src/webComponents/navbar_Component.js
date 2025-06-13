@@ -202,7 +202,6 @@ const template = /* html */ `
         <div class="nav-dropdown">
           <button class="nav-link dropdown-toggle" id="downloadDropdown">
             <span id="str-menu-download">Download</span>
-            <i data-lucide="chevron-down" class="dropdown-icon"></i>
           </button>
           <div class="dropdown-content" id="downloadDropdownContent">
             <a href="#download" class="dropdown-item" id="str-download-option1">Official Images</a>
@@ -218,7 +217,6 @@ const template = /* html */ `
           <i data-lucide="github"></i>
         </a>
         <button class="nav-toggle" id="navToggle">
-          <i data-lucide="menu"></i>
         </button>
       </div>
     </div>
@@ -229,7 +227,6 @@ class NavbarComponent extends HTMLElement {
   constructor() {
     super()
     this.shadow = this.attachShadow({ mode: "open" })
-    this.lucide = window.lucide // Declare the lucide variable here
   }
 
   connectedCallback() {
@@ -242,26 +239,8 @@ class NavbarComponent extends HTMLElement {
   }
 
   initializeNavigation() {
-    const navToggle = this.shadow.getElementById("navToggle")
-    const navMenu = this.shadow.getElementById("navMenu")
     const dropdown = this.shadow.querySelector(".nav-dropdown")
     const dropdownContent = this.shadow.querySelector(".dropdown-content")
-
-    // Mobile menu toggle
-    if (navToggle && navMenu) {
-      navToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active")
-        const icon = navToggle.querySelector("i")
-        if (navMenu.classList.contains("active")) {
-          icon.setAttribute("data-lucide", "x")
-        } else {
-          icon.setAttribute("data-lucide", "menu")
-        }
-        if (this.lucide) {
-          this.lucide.createIcons()
-        }
-      })
-    }
 
     // Dropdown functionality
     if (dropdown && dropdownContent) {
@@ -278,26 +257,12 @@ class NavbarComponent extends HTMLElement {
       })
     }
 
-    // Improved smooth scrolling for anchor links
+    // Sections scrols for anchor links
     this.shadow.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (e) => {
         e.preventDefault()
         const targetId = anchor.getAttribute("href").substring(1)
         this.scrollToSection(targetId)
-      })
-    })
-
-    // Close mobile menu when clicking on links
-    this.shadow.querySelectorAll(".nav-link").forEach((link) => {
-      link.addEventListener("click", () => {
-        if (navMenu.classList.contains("active")) {
-          navMenu.classList.remove("active")
-          const icon = navToggle.querySelector("i")
-          icon.setAttribute("data-lucide", "menu")
-          if (this.lucide) {
-            this.lucide.createIcons()
-          }
-        }
       })
     })
 
@@ -324,19 +289,14 @@ class NavbarComponent extends HTMLElement {
 
       lastScrollY = currentScrollY
     })
+    
   }
 
-  // Add this new method to handle scrolling to sections
   scrollToSection(sectionId) {
-    // First try to find the element by ID
     let target = document.getElementById(sectionId)
-
-    // If not found, try to find it by querySelector
     if (!target) {
       target = document.querySelector(`#${sectionId}`)
     }
-
-    // If still not found, try to find it within shadow DOMs
     if (!target) {
       const allComponents = document.querySelectorAll("*")
       for (const component of allComponents) {
@@ -377,3 +337,5 @@ class NavbarComponent extends HTMLElement {
 }
 
 customElements.define("navbar-component", NavbarComponent)
+
+

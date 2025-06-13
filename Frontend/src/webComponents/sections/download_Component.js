@@ -22,10 +22,10 @@ const styles = /* css */ `
   }
 
   .section-title {
-    font-size: 2.5rem;
+    font-size: 3rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    background: linear-gradient(135deg, #a9b650 0%, #ffffff 100%);
+    background: var(--gradient-title);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -265,15 +265,12 @@ const template = /* html */ `
             <h4 class="requirements-subtitle" id="str-tabletitle-minimum">Minimum</h4>
             <ul class="requirements-list">
               <li class="requirement-item">
-                <i data-lucide="cpu"></i>
                 <span id="str-tablecontent-mincpu">x86_64 1.00 GHz CPU</span>
               </li>
               <li class="requirement-item">
-                <i data-lucide="memory-stick"></i>
                 <span id="str-tablecontent-minram">1GB of RAM</span>
               </li>
               <li class="requirement-item">
-                <i data-lucide="hard-drive"></i>
                 <span id="str-tablecontent-mindisk">8.5GB disk storage</span>
               </li>
             </ul>
@@ -282,15 +279,12 @@ const template = /* html */ `
             <h4 class="requirements-subtitle" id="str-tabletitle-recommended">Recommended</h4>
             <ul class="requirements-list">
               <li class="requirement-item">
-                <i data-lucide="cpu"></i>
                 <span id="str-tablecontent-reccpu">x86_64 2.00 GHz CPU dual-core</span>
               </li>
               <li class="requirement-item">
-                <i data-lucide="memory-stick"></i>
                 <span id="str-tablecontent-recram">2GB of RAM</span>
               </li>
               <li class="requirement-item">
-                <i data-lucide="hard-drive"></i>
                 <span id="str-tablecontent-recdisk">8.5GB SSD storage</span>
               </li>
             </ul>
@@ -312,7 +306,6 @@ const template = /* html */ `
             <div class="download-buttons">
               <a href="https://sourceforge.net/projects/cuerdos/files/stable/standard/CuerdOS-1.2.1-Standard_amd64.iso/download" 
                  class="btn btn-primary download-primary">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge">Download from Sourceforge</span>
               </a>
               <div class="download-secondary">
@@ -322,13 +315,11 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/standard-hash.txt" class="download-checksum">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
           </div>
         </div>
-
         <div class="download-card">
           <div class="download-image">
             <img src="Frontend/src/Images/cuerdos-legacy.webp" alt="CuerdOS Legacy">
@@ -341,7 +332,6 @@ const template = /* html */ `
             <div class="download-buttons">
               <a href="https://sourceforge.net/projects/cuerdos/files/stable/legacy/CuerdOS-1.2.1-Legacy_amd64.iso/download" 
                  class="btn btn-primary download-primary legacy-btn">
-                <i data-lucide="download"></i>
                 <span id="str-download-sourceforge-2">Download from Sourceforge</span>
               </a>
               <div class="download-secondary">
@@ -351,14 +341,12 @@ const template = /* html */ `
                    class="btn btn-outline">Torrent</a>
               </div>
               <a href="checksums/legacy-hash.txt" class="download-checksum legacy-link">
-                <i data-lucide="external-link"></i>
                 Checksums
               </a>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </section>
 `
@@ -371,7 +359,6 @@ class DownloadComponent extends HTMLElement {
 
   connectedCallback() {
     this.render()
-    this.initializeDownloads()
   }
 
   render() {
